@@ -1,0 +1,387 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7fb;
+    background-image: 
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(238, 244, 252, 0.85) 60%, rgba(228, 237, 248, 0.95) 100%),
+      url('/white_blue_silk_mesh.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* =========================================================
+   WHITISH BLUE & FROSTED GLASS CARDS
+   ========================================================= */
+
+.frost-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.07), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.frost-card:hover {
+  border-color: rgba(191, 219, 254, 0.8);
+  box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.1), 0 6px 16px -3px rgba(15, 23, 42, 0.04);
+}
+
+.frost-pill {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.frost-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px 0 rgba(37, 99, 235, 0.12);
+  border-color: rgba(147, 197, 253, 0.8);
+}
+
+.dark-upload-card {
+  background-color: #161822;
+  background-image: radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.15) 0, transparent 50%);
+  border: 1px solid #282b3a;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  color: #f8fafc;
+}
+
+/* =========================================================
+   BLUR ANIMATIONS & SCROLL REVEAL SYSTEM
+   ========================================================= */
+
+/* 1. Blur Fade In Animation */
+@keyframes blurFadeIn {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-blurFadeIn {
+  animation: blurFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 2. Soft Floating Pill Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+.animate-floatSlow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(-0.5deg);
+  }
+}
+
+.animate-floatReverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+/* 3. Bounce Scroll Guide */
+@keyframes bounceSlow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(7px);
+  }
+  60% {
+    transform: translateY(3px);
+  }
+}
+
+.animate-bounceSlow {
+  animation: bounceSlow 2.2s infinite;
+}
+
+/* 4. Staggered Delays */
+.stagger-1 { animation-delay: 60ms; }
+.stagger-2 { animation-delay: 120ms; }
+.stagger-3 { animation-delay: 180ms; }
+.stagger-4 { animation-delay: 240ms; }
+.stagger-5 { animation-delay: 300ms; }
+
+/* 5. Modal Backdrop Blur */
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+.animate-backdropIn {
+  animation: backdropIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes backdropOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.animate-backdropOut {
+  animation: backdropOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 6. Modal Dialog Scale */
+@keyframes modalIn {
+  0% {
+    filter: blur(8px);
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modalIn {
+  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalOut {
+  0% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    filter: blur(6px);
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+}
+
+.animate-modalOut {
+  animation: modalOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 7. Toast Notification */
+@keyframes toastIn {
+  0% {
+    filter: blur(6px);
+    opacity: 0;
+    transform: translateY(24px) scale(0.94);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toastIn {
+  animation: toastIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.95);
+  }
+}
+
+.animate-toastOut {
+  animation: toastOut 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.animate-toastProgress {
+  animation: toastProgress 2.8s linear forwards;
+}
+
+/* 8. File List Items */
+@keyframes fileAdd {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+    max-height: 0px;
+    margin-bottom: 0px;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    max-height: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+.animate-fileAdd {
+  animation: fileAdd 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fileRemove {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    max-height: 90px;
+    margin-bottom: 10px;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateX(24px);
+    max-height: 0px;
+    margin-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+  }
+}
+
+.animate-fileRemove {
+  animation: fileRemove 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow: hidden;
+}
+
+/* 9. Sentence Inspector Box */
+@keyframes inspectorOpen {
+  0% {
+    filter: blur(6px);
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-inspectorOpen {
+  animation: inspectorOpen 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes inspectorClose {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+
+.animate-inspectorClose {
+  animation: inspectorClose 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 10. Accordion */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+  opacity: 0;
+}
+
+.accordion-content.expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+/* 11. Score Pop */
+@keyframes scorePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scorePop {
+  animation: scorePop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 12. Shimmer Bar */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
